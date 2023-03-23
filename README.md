@@ -6,3 +6,5 @@ Edit `application.properties` file
 2. Change the username and password
 3. Change the db name if its different
 4. Change port if its different
+
+## To run the sample application
