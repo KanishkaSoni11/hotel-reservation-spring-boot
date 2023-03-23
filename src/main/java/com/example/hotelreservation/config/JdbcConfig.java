@@ -11,19 +11,19 @@ import javax.sql.DataSource;
 @Configuration
 public class JdbcConfig {
 
-    @Value("database.host")
+    @Value("${database.server}")
     private String serverName;
 
-    @Value("database.user")
+    @Value("${database.user}")
     private String username;
 
-    @Value("database.password")
+    @Value("${database.password}")
     private String password;
 
-    @Value("database.port")
+    @Value("${database.port}")
     private String port;
 
-    @Value("database.name")
+    @Value("${database.name}")
     private String databaseName;
 
     @Bean
