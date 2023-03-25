@@ -6,13 +6,13 @@ public enum RoomType {
 	DELUXE("DELUXE"),
 	SUITE("SUITE");
 
-	private String roomType;
+	private final String roomType;
 
 	RoomType(String roomType) {
 		this.roomType = roomType;
 	}
 
-	public String getRoomType() {
-		return roomType;
+	public String getString() {
+		return this.roomType;
 	}
 }
