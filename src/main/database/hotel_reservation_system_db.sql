@@ -104,3 +104,9 @@ create table room_bill_details(
                                   foreign key(bill_id) references bill_details(bill_id) on update cascade on delete cascade,
                                   primary key(room_number, bill_id)
 );
+
+alter table customer add password varchar(20);
+
+alter table staff add password varchar(20);
+
+alter table order_quantity add quantity int;
