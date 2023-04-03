@@ -17,7 +17,7 @@ public class CustomerRowMapper implements RowMapper<Customer> {
 		customer.setLastName(rs.getString("last_name"));
 		customer.setStreet(rs.getString("street"));
 		customer.setState(rs.getString("state"));
-		customer.setZipCode(rs.getString("zip_code"));
+		customer.setZipCode(rs.getInt("zip_code"));
 		customer.setContactNumber(rs.getInt("contact_no"));
 		customer.setEmailId(rs.getString("email_id"));
 		customer.setIdentificationNumber(rs.getString("identification_number"));

@@ -11,7 +11,7 @@ public class Customer {
 	private String lastName;
 	private String street;
 	private String state;
-	private String zipCode;
+	private int zipCode;
 	private String emailId;
 	private int contactNumber;
 	private String identificationNumber;
@@ -56,11 +56,11 @@ public class Customer {
 		this.state = state;
 	}
 
-	public String getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(String zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 
