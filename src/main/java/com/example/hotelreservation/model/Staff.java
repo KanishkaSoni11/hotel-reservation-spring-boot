@@ -18,6 +18,8 @@ public class Staff {
     private int salary;
     private Date joiningDate;
 
+    private String password;
+
     public int getStaffId() {
         return staffId;
     }
@@ -96,6 +98,14 @@ public class Staff {
 
     public void setJoiningDate(Date joiningDate) {
         this.joiningDate = joiningDate;
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
+
+    public void setPassword(){
+        this.password = password;
     }
 
     @Override

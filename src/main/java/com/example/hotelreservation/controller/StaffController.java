@@ -5,12 +5,7 @@ import com.example.hotelreservation.service.StaffService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StaffController {
@@ -28,12 +23,23 @@ public class StaffController {
 //    }
 
     @GetMapping("/staff/{staffId}")
-    public Staff getStaffById(@PathVariable int staffId){
-        try{
+    public Staff getStaffById(@PathVariable int staffId) {
+        try {
             logger.info("Fetching all staff by id:" + staffId);
             return staffService.getStaffById(staffId);
-        }catch(Exception e) {
+        } catch (Exception e) {
             logger.error("No staff found");
+            return null;
+        }
+    }
+
+    @PostMapping("/staff/login")
+    public Staff loginStaff(@RequestBody Staff staff) {
+        try {
+            logger.info("Checking login cred for " + staff.getStaffId() + " " + staff.getPassword());
+            return staffService.loginStaff(staff.getStaffId(), staff.getPassword());
+        } catch (Exception e) {
+            logger.error("Invalid credentials");
             return null;
         }
     }
