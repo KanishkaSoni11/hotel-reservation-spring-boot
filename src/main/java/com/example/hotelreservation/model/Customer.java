@@ -7,6 +7,7 @@ public class Customer {
 	}
 
 	private int customerID;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private String street;
@@ -86,5 +87,13 @@ public class Customer {
 
 	public void setIdentificationNumber(String identificationNumber) {
 		this.identificationNumber = identificationNumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
