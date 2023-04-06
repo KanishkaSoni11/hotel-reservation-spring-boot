@@ -26,4 +26,10 @@ public class StaffDaoImpl implements StaffDao {
         String sql = "select * from staff;";
         return jdbcTemplate.query(sql, new StaffRowMapper());
     }
+
+    @Override
+    public Staff loginStaff(int staffId, String password) {
+        String sql = "select * from staff where staff_id = ? and password = ?;";
+        return jdbcTemplate.queryForObject(sql, new StaffRowMapper(), staffId, password);
+    }
 }

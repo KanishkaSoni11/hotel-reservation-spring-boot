@@ -13,4 +13,6 @@ public interface StaffDao {
     public Staff getStaffById(int staffId);
 
     public List<Staff> getAllStaff();
+
+    public Staff loginStaff(int staffId, String password);
 }
