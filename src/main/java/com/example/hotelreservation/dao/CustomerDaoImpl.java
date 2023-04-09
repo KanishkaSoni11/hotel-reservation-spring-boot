@@ -23,7 +23,6 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Customer registerCustomer(Customer customer) {
 		try {
-			System.out.println(customer);
 			String query = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(query,
 					customer.getCustomerID(), customer.getFirstName(), customer.getLastName(),
@@ -33,6 +32,18 @@ public class CustomerDaoImpl implements CustomerDao {
 			return customer;
 		} catch(Exception e) {
 			logger.error("Exception while registering user");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Customer loginCustomer(String emailId, String password) {
+		try{
+			String sql = "select * from customer where email_id = ? and password = ?;";
+			return jdbcTemplate.queryForObject(sql, new CustomerRowMapper(), emailId, password);
+		}catch (Exception e) {
+			logger.error("Error while logging in user");
 			e.printStackTrace();
 			return null;
 		}

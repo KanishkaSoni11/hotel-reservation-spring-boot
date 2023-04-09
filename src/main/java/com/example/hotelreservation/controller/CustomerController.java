@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +37,9 @@ public class CustomerController {
 		return customerService.registerCustomer(customer);
 	}
 
-	@GetMapping("/{userEmail}")
-	public Customer getCustomerByUserEmail(@PathVariable String userEmail) {
-		logger.info("Fetching customer by email");
-		return customerService.getCustomerByUserEmail(userEmail);
+	@PostMapping("/login")
+	public Customer loginCustomer(@RequestBody Customer customer) {
+		logger.info("Logging the customer in");
+		return customerService.loginCustomer(customer);
 	}
 }

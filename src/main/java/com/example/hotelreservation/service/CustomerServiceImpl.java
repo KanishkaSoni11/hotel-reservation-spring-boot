@@ -18,6 +18,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	public Customer loginCustomer(Customer customer) {
+		return customerDao.loginCustomer(customer.getEmailId(), customer.getPassword());
+	}
+
+	@Override
 	public Customer getCustomerByUserEmail(String userEmail) {
 		return customerDao.getCustomerByUserEmail(userEmail);
 	}
