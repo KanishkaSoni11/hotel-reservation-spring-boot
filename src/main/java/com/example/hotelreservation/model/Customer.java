@@ -6,21 +6,22 @@ public class Customer {
 
 	}
 
-	private int customerID;
+	private String customerID;
+	private String password;
 	private String firstName;
 	private String lastName;
 	private String street;
 	private String state;
-	private String zipCode;
+	private int zipCode;
 	private String emailId;
 	private int contactNumber;
 	private String identificationNumber;
 
-	public int getCustomerID() {
+	public String getCustomerID() {
 		return customerID;
 	}
 
-	public void setCustomerID(int customerID) {
+	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
 	}
 
@@ -56,11 +57,11 @@ public class Customer {
 		this.state = state;
 	}
 
-	public String getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(String zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 
@@ -86,5 +87,31 @@ public class Customer {
 
 	public void setIdentificationNumber(String identificationNumber) {
 		this.identificationNumber = identificationNumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String
+	toString() {
+		final StringBuilder sb = new StringBuilder("Customer{");
+		sb.append("customerID=").append(customerID);
+		sb.append(", password='").append(password).append('\'');
+		sb.append(", firstName='").append(firstName).append('\'');
+		sb.append(", lastName='").append(lastName).append('\'');
+		sb.append(", street='").append(street).append('\'');
+		sb.append(", state='").append(state).append('\'');
+		sb.append(", zipCode=").append(zipCode);
+		sb.append(", emailId='").append(emailId).append('\'');
+		sb.append(", contactNumber=").append(contactNumber);
+		sb.append(", identificationNumber='").append(identificationNumber).append('\'');
+		sb.append('}');
+		return sb.toString();
 	}
 }
