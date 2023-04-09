@@ -78,7 +78,7 @@ create table order_quantity(
 );
 
 create table customer(
-                         customer_id int primary key not null,
+                         customer_id varchar(100) primary key not null,
                          first_name varchar(60) not null,
                          last_name varchar(60) not null,
                          street varchar(50) not null,
@@ -90,7 +90,7 @@ create table customer(
 );
 
 create table reservation_placed(
-                                   customer_id int not null,
+                                   customer_id varchar(100) not null,
                                    reservation_id int not null,
                                    primary key(customer_id, reservation_id),
                                    foreign key(reservation_id) references reservation(reservation_number) on update cascade on delete cascade,

@@ -13,8 +13,8 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 
 	@Override
-	public int registerCustomer(String username, String password) {
-		return customerDao.registerCustomer(username, password);
+	public Customer registerCustomer(Customer customer) {
+		return customerDao.registerCustomer(customer);
 	}
 
 	@Override

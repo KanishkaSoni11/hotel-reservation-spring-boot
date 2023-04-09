@@ -1,23 +1,41 @@
 package com.example.hotelreservation.dao;
 
+import com.example.hotelreservation.controller.CustomerController;
 import com.example.hotelreservation.model.Customer;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.SQL;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
+
 @Component
 public class CustomerDaoImpl implements CustomerDao {
+
+	private static final Logger logger = LogManager.getLogger(CustomerDaoImpl.class);
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public int registerCustomer(String username, String password) {
-		String query = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		return jdbcTemplate.update(query,
-				12345, username, "Bhagat", "Boylston Street",
-				"MA", 02215, "rajat@mail.com", 9999, "12345");
+	public Customer registerCustomer(Customer customer) {
+		try {
+			System.out.println(customer);
+			String query = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(query,
+					customer.getCustomerID(), customer.getFirstName(), customer.getLastName(),
+					customer.getStreet(), customer.getState(), customer.getZipCode(),
+					customer.getEmailId(), customer.getContactNumber(), customer.getIdentificationNumber(),
+					customer.getPassword());
+			return customer;
+		} catch(Exception e) {
+			logger.error("Exception while registering user");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override

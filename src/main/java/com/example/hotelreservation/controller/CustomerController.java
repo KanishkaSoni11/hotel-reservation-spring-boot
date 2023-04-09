@@ -8,26 +8,37 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/customer/")
 public class CustomerController {
 
-	private static final Logger logger = LogManager.getLogger(StaffController.class);
+	private static final Logger logger = LogManager.getLogger(CustomerController.class);
 
 	@Autowired
 	private CustomerService customerService;
 
-	@PutMapping("/register")
-	public int registerCustomer(@RequestBody Customer customer) {
-		return customerService.registerCustomer(customer.getFirstName(), "password");
+	@GetMapping("/customers")
+	public String getALlCustomers() {
+		logger.error("Fetching all authors");
+		return "customerService.getAllAuthors();";
 	}
 
-	@GetMapping("/customer/{userEmail}")
+	@PostMapping("/register")
+	public Customer registerCustomer(@RequestBody Customer customer) {
+		logger.info(customer);
+		customer.setCustomerID(UUID.randomUUID().toString());
+		customer.setIdentificationNumber(UUID.randomUUID().toString());
+		return customerService.registerCustomer(customer);
+	}
+
+	@GetMapping("/{userEmail}")
 	public Customer getCustomerByUserEmail(@PathVariable String userEmail) {
 		logger.info("Fetching customer by email");
 		return customerService.getCustomerByUserEmail(userEmail);
