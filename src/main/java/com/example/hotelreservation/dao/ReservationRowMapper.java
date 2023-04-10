@@ -15,7 +15,7 @@ public class ReservationRowMapper implements RowMapper<Reservation> {
 		reservation.setReservationNumber(rs.getInt("reservation_number"));
 		reservation.setNumberOfRooms(rs.getInt("number_of_rooms"));
 		reservation.setNumberOfGuests(rs.getInt("number_of_guests"));
-		reservation.setTypeOfRoom(DaoUtils.getRoomTypeFromString(rs.getString("room_type")));
+		reservation.setTypeOfRoom(DaoUtils.getRoomTypeFromString(rs.getString("type_of_room")));
 		reservation.setDateOfReservation(rs.getDate("date_of_reservation"));
 		reservation.setFromDate(rs.getDate("date_from"));
 		reservation.setToDate(rs.getDate("date_to"));
