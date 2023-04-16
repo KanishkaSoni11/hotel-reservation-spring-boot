@@ -6,8 +6,8 @@ public class DaoUtils {
 
 	public static RoomType getRoomTypeFromString(String roomType) {
 		switch (roomType) {
-			case "STANDARD":
-				return RoomType.STANDARD;
+			case "KING":
+				return RoomType.KING;
 			case "DELUXE":
 				return RoomType.DELUXE;
 			case "SUITE":

@@ -1,11 +1,15 @@
 package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.model.Customer;
+import com.example.hotelreservation.model.ReservationDetails;
 import com.example.hotelreservation.service.CustomerService;
+import com.example.hotelreservation.service.ReservationService;
+import com.example.hotelreservation.service.RoomService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +26,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private ReservationService reservationService;
 
 	@GetMapping("/customers")
 	public String getALlCustomers() {
@@ -41,5 +48,13 @@ public class CustomerController {
 	public Customer loginCustomer(@RequestBody Customer customer) {
 		logger.info("Logging the customer in");
 		return customerService.loginCustomer(customer);
+ 	}
+
+	@PostMapping("/reserve")
+	public Integer makeReservation(@RequestBody ReservationDetails reservationDetails) {
+		logger.info("Checking if the reservation can be made or not");
+		return reservationService.checkIfReservationIsPossible(reservationDetails.getFromDate(),
+				reservationDetails.getToDate(), reservationDetails.getNumRooms(),
+				reservationDetails.getRoomType());
 	}
 }
