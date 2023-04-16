@@ -15,6 +15,24 @@ public class StaffRoom {
 
     private String typeOfRoom;
 
+    private int reservationNumber;
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public int getReservationNumber() {
+        return reservationNumber;
+    }
+
+    public void setReservationNumber(int reservationNumber) {
+        this.reservationNumber = reservationNumber;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -35,8 +53,8 @@ public class StaffRoom {
         this.firstName = firstName;
     }
 
-    public void setDate_from(Date date_from) {
-        this.dateFrom = date_from;
+    public void setDate_from(Date dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
     public void setDateTo(Date dateTo) {

@@ -1,14 +1,13 @@
 package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.model.Reservation;
+import com.example.hotelreservation.model.ReservationAssignment;
 import com.example.hotelreservation.model.StaffRoom;
 import com.example.hotelreservation.service.ReservationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/allrooms")
+    @GetMapping("/roomsunassigned")
     public List<StaffRoom> getAllRooms() {
         try {
             logger.info("fetching ");
@@ -42,5 +41,19 @@ public class ReservationController {
             logger.error("Invalid credentials");
             return null;
         }
+    }
+
+    @PostMapping("/assignroom")
+    public ReservationAssignment assignRoom(@RequestBody ReservationAssignment reservationAssignment) {
+        try{
+            System.out.println(reservationAssignment.getReservationNumber());
+            System.out.println(reservationAssignment.getRoomNumber());
+            System.out.println(reservationAssignment.getStaffId());
+            logger.info(reservationAssignment.toString());
+            reservationService.assignRoom(reservationAssignment);
+        }catch (Exception e){
+            logger.error("Error");
+        }
+        return null;
     }
 }
