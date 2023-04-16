@@ -2,7 +2,7 @@ package com.example.hotelreservation.model;
 
 public enum RoomType {
 
-	STANDARD("STANDARD"),
+	KING("KING"),
 	DELUXE("DELUXE"),
 	SUITE("SUITE");
 
