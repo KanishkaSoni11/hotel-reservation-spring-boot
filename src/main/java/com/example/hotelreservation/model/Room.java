@@ -2,43 +2,43 @@ package com.example.hotelreservation.model;
 
 public class Room {
 
-	public Room() {
-	}
+    public Room() {
+    }
 
-	private int roomNumber;
-	private RoomType roomType;
-	private boolean availabilityStatus;
-	private int cost;
+    private int roomNumber;
+    private String roomType;
+    private String availabilityStatus;
+    private int cost;
 
-	public int getRoomNumber() {
-		return roomNumber;
-	}
+    public int getRoomNumber() {
+        return roomNumber;
+    }
 
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
-	}
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
+    }
 
-	public RoomType getRoomType() {
-		return roomType;
-	}
+    public String getRoomType() {
+        return roomType;
+    }
 
-	public void setRoomType(RoomType roomType) {
-		this.roomType = roomType;
-	}
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
 
-	public boolean isAvailabilityStatus() {
-		return availabilityStatus;
-	}
+    public String isAvailabilityStatus() {
+        return availabilityStatus;
+    }
 
-	public void setAvailabilityStatus(boolean availabilityStatus) {
-		this.availabilityStatus = availabilityStatus;
-	}
+    public void setAvailabilityStatus(String availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
+    }
 
-	public int getCost() {
-		return cost;
-	}
+    public int getCost() {
+        return cost;
+    }
 
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 }
