@@ -1,11 +1,12 @@
 package com.example.hotelreservation.dao;
 
-import com.example.hotelreservation.controller.CustomerController;
+
 import com.example.hotelreservation.model.Reservation;
 import com.example.hotelreservation.model.RoomType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.example.hotelreservation.model.ReservationAssignment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -34,10 +35,24 @@ public class ReservationDaoImpl implements ReservationDao{
             String sql = "select isReservationPossible(?, ?, ? , ?)";
             return jdbcTemplate.queryForObject(sql, Integer.class,
                     new Object[]{fromDate, toDate, numberOfRooms, roomType.getString()});
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error("Unable to check for reservation");
             return 0;
         }
+    }
+
+    @Override
+    public ReservationAssignment assignRoom(ReservationAssignment reservationAssignment) {
+        String sql = "insert into reservation_assignment values (?, ?, ?, ?);";
+
+         jdbcTemplate.update(sql,
+                 reservationAssignment.getReservationNumber(),
+                 reservationAssignment.getStaffId(),
+                 reservationAssignment.getRoomNumber(),
+                 "Checked-in"
+                 );
+
+         return reservationAssignment;
     }
 }
