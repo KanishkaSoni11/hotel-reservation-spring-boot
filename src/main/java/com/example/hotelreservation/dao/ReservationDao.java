@@ -16,9 +16,5 @@ public interface ReservationDao {
 
     public ReservationAssignment assignRoom(ReservationAssignment reservationAssignment);
 
-    public int insertIntoReservation(ReservationDetails reservationDetails);
-
-    public Reservation getReservation(Date fromDate, Date toDate, Integer numRooms);
-
-    public int insertIntoReservationPlaced(Reservation reservation, Customer customer);
+    public Reservation createReservation(ReservationDetails reservationDetails, Customer customer);
 }

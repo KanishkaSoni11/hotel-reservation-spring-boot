@@ -46,45 +46,23 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public int insertIntoReservation(ReservationDetails reservationDetails) {
+    public Reservation createReservation(ReservationDetails reservationDetails, Customer customer) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
             Date date = new Date();
-            String query = "insert into reservation values (?, ?, ?, ?, ?, ?, ?)";
-            return jdbcTemplate.update(query,
+            String sql = "call create_reservation(?, ?, ?, ?, ?, ?, ?)";
+            return jdbcTemplate.queryForObject(sql, new ReservationRowMapper(),
+                    reservationDetails.getFromDate(),
+                    reservationDetails.getToDate(),
                     reservationDetails.getNumRooms(),
                     reservationDetails.getNumGuests(),
-                    reservationDetails.getRoomType().getString(),
                     formatter.format(date),
-                    reservationDetails.getFromDate(),
-                    reservationDetails.getToDate());
-        } catch(Exception e) {
-            logger.error("Error while inserting into Reservation");
+                    reservationDetails.getRoomType().getString(),
+                    customer.getCustomerID());
+        } catch (Exception e) {
+            logger.error("Error while creating reservation");
             e.printStackTrace();
-            return -1;
-        }
-    }
-
-    @Override
-    public Reservation getReservation(Date fromDate, Date toDate, Integer numRooms) {
-        try {
-            String sql = "select * from reservation where date_from = ? and date_to = ? and number_of_rooms = ?";
-            return jdbcTemplate.queryForObject(sql, new ReservationRowMapper(), fromDate, toDate, numRooms);
-        } catch(Exception e) {
-            logger.error("Error while fetching the reservation");
             return null;
-        }
-    }
-
-    @Override
-    public int insertIntoReservationPlaced(Reservation reservation, Customer customer) {
-        try {
-            String sql = "insert into reservation_placed values (?, ?)";
-            return jdbcTemplate.update(sql, customer.getCustomerID(), reservation.getReservationNumber());
-        } catch(Exception e) {
-            logger.error("Error while inserting into reservation_placed");
-            e.printStackTrace();
-            return -1;
         }
     }
 

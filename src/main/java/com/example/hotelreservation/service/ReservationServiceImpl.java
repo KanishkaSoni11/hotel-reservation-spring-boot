@@ -41,11 +41,7 @@ public class ReservationServiceImpl implements ReservationService{
                 reservationDetails.getRoomType());
         if (isReservationPossible > 0) {
             logger.info("Reservation is possible. Procedding with the reservation");
-            reservationDao.insertIntoReservation(reservationDetails);
-            Reservation reservation = reservationDao.getReservation(reservationDetails.getFromDate(),
-                    reservationDetails.getToDate(), reservationDetails.getNumGuests());
-            reservationDao.insertIntoReservationPlaced(reservation, reservationDetails.getCurrentCustomer());
-            return reservation;
+            return reservationDao.createReservation(reservationDetails, reservationDetails.getCurrentCustomer());
         } else {
             logger.info("Reservation is not possible. Please choose different dates");
             return null;
