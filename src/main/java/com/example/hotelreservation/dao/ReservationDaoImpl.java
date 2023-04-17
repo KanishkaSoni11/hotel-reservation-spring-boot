@@ -1,7 +1,9 @@
 package com.example.hotelreservation.dao;
 
 
+import com.example.hotelreservation.model.Customer;
 import com.example.hotelreservation.model.Reservation;
+import com.example.hotelreservation.model.ReservationDetails;
 import com.example.hotelreservation.model.RoomType;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +12,7 @@ import com.example.hotelreservation.model.ReservationAssignment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Repository
@@ -39,6 +42,27 @@ public class ReservationDaoImpl implements ReservationDao{
             e.printStackTrace();
             logger.error("Unable to check for reservation");
             return 0;
+        }
+    }
+
+    @Override
+    public Reservation createReservation(ReservationDetails reservationDetails, Customer customer) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd");
+            Date date = new Date();
+            String sql = "call create_reservation(?, ?, ?, ?, ?, ?, ?)";
+            return jdbcTemplate.queryForObject(sql, new ReservationRowMapper(),
+                    reservationDetails.getFromDate(),
+                    reservationDetails.getToDate(),
+                    reservationDetails.getNumRooms(),
+                    reservationDetails.getNumGuests(),
+                    formatter.format(date),
+                    reservationDetails.getRoomType().getString(),
+                    customer.getCustomerID());
+        } catch (Exception e) {
+            logger.error("Error while creating reservation");
+            e.printStackTrace();
+            return null;
         }
     }
 

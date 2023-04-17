@@ -7,11 +7,20 @@ public class ReservationDetails {
 	private Customer currentCustomer;
 	private Date fromDate;
 	private Date toDate;
+	private Integer numGuests;
 	private Integer numRooms;
 	private RoomType roomType;
 
 	public ReservationDetails() {
 		// Mandatory empty constructor
+	}
+
+	public Integer getNumGuests() {
+		return numGuests;
+	}
+
+	public void setNumGuests(Integer numGuests) {
+		this.numGuests = numGuests;
 	}
 
 	public Date getFromDate() {
