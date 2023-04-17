@@ -1,6 +1,7 @@
 package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.model.Customer;
+import com.example.hotelreservation.model.Reservation;
 import com.example.hotelreservation.model.ReservationDetails;
 import com.example.hotelreservation.service.CustomerService;
 import com.example.hotelreservation.service.ReservationService;
@@ -51,10 +52,8 @@ public class CustomerController {
  	}
 
 	@PostMapping("/reserve")
-	public Integer makeReservation(@RequestBody ReservationDetails reservationDetails) {
+	public Reservation makeReservation(@RequestBody ReservationDetails reservationDetails) {
 		logger.info("Checking if the reservation can be made or not");
-		return reservationService.checkIfReservationIsPossible(reservationDetails.getFromDate(),
-				reservationDetails.getToDate(), reservationDetails.getNumRooms(),
-				reservationDetails.getRoomType());
+		return reservationService.makeReservation(reservationDetails);
 	}
 }
