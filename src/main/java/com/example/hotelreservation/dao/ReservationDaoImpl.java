@@ -101,18 +101,4 @@ public class ReservationDaoImpl implements ReservationDao{
         }
     }
 
-
-//    public Reservation getReservationFromCustomerId(String customerId) {
-//        try {
-//            String sql = "select r.* from reservation r "
-//                    + "join reservation_placed rp "
-//                    + "on r.reservation_number = rp.reservation_id "
-//                    + "where rp.customer_id = ?";
-//            return jdbcTemplate.queryForObject(sql, new ReservationRowMapper(), customerId);
-//        } catch (Exception e) {
-//            logger.error("Error while fetching reservation from customerid");
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 }

@@ -97,6 +97,4 @@ public class FoodItemDaoImpl implements FoodItemDao {
             return null;
         }
     }
-
-
 }

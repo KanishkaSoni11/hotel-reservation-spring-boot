@@ -63,14 +63,14 @@ p_bill_date date)
 begin
 	declare food_total_cost int;
     declare bill_desc varchar(300);
-    set bill_desc = concat('Food bill for order', p_order_id);
+    set bill_desc = concat('Food bill for order ', p_order_id);
     select  sum(ofl.quantity * fi.cost) into food_total_cost from order_food_link ofl
 	join food_item fi
 	on ofl.item_id = fi.item_id
-	where ofl.order_id = 3;
+	where ofl.order_id = p_order_id;
     update order_details set total_cost = food_total_cost where order_id = p_order_id;
     insert into bill_details (room_number, cost, bill_description, payment_method, payment_details, bill_date)
     values (p_room_number, food_total_cost, bill_desc,'Cash', 'Cash', p_bill_date);
+    select * from order_details where order_id = p_order_id;
 end $$
 delimiter ;
-
