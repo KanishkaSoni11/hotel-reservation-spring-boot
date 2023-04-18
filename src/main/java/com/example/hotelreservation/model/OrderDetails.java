@@ -11,7 +11,7 @@ public class OrderDetails {
 
 	// TODO: maybe convert these to objects of Room and Staff?
 	private int roomNumber;
-	private int staffResponsible;
+	private String orderStatus;
 
 	public int getOrderId() {
 		return orderId;
@@ -37,11 +37,11 @@ public class OrderDetails {
 		this.roomNumber = roomNumber;
 	}
 
-	public int getStaffResponsible() {
-		return staffResponsible;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setStaffResponsible(int staffResponsible) {
-		this.staffResponsible = staffResponsible;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 }

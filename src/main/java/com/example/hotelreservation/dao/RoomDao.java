@@ -9,4 +9,6 @@ import java.util.List;
 public interface RoomDao {
 
     public List<Room> getAvailableRooms(LocalDate dateFrom, LocalDate dateTo, String roomType);
+
+    public List<Room> getRoomFromReservationId(int reservationId);
 }

@@ -13,9 +13,9 @@ public class OrderDetailsRowMapper implements RowMapper<OrderDetails> {
 	public OrderDetails mapRow(ResultSet rs, int rowNum) throws SQLException {
 		OrderDetails orderDetails = new OrderDetails();
 		orderDetails.setOrderId(rs.getInt("order_id"));
-		orderDetails.setCost(rs.getInt("cost"));
+		orderDetails.setCost(rs.getInt("total_cost"));
 		orderDetails.setRoomNumber(rs.getInt("room_number"));
-		orderDetails.setStaffResponsible(rs.getInt("staff_id"));
+		orderDetails.setOrderStatus(rs.getString("order_status"));
 		return orderDetails;
 	}
 }
