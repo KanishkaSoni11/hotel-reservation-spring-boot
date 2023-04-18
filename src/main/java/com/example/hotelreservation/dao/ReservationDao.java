@@ -17,4 +17,6 @@ public interface ReservationDao {
     public ReservationAssignment assignRoom(ReservationAssignment reservationAssignment);
 
     public Reservation createReservation(ReservationDetails reservationDetails, Customer customer);
+
+    public Reservation getReservationFromCustomerId(String customerId);
 }

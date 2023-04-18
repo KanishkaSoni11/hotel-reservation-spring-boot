@@ -2,6 +2,7 @@ package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.model.Reservation;
 import com.example.hotelreservation.model.ReservationAssignment;
+import com.example.hotelreservation.model.Room;
 import com.example.hotelreservation.model.StaffRoom;
 import com.example.hotelreservation.service.ReservationService;
 import org.apache.logging.log4j.LogManager;
@@ -55,6 +56,22 @@ public class ReservationController {
             }
 
             return finalList;
+        } catch (Exception e) {
+            logger.error("Invalid credentials");
+            return null;
+        }
+    }
+
+    @GetMapping("/room/{reservationId}")
+    public List<Room> getRoomFromReservationId(@PathVariable int reservationId) {
+        return reservationService.getRoomFromReservationId(reservationId);
+    }
+
+    @GetMapping("/{customerId}")
+    public Reservation getReservationFromCustomerId(@PathVariable String customerId) {
+        try {
+            logger.info("fetching ");
+            return reservationService.getReservationFromCustomerId(customerId);
         } catch (Exception e) {
             logger.error("Invalid credentials");
             return null;
