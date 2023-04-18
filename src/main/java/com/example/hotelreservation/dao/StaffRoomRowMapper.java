@@ -16,6 +16,7 @@ public class StaffRoomRowMapper implements RowMapper<StaffRoom> {
         staffRoom.setDateTo(rs.getDate("date_to"));
         staffRoom.setTypeOfRoom(rs.getString("type_of_room"));
         staffRoom.setReservationNumber(rs.getInt("reservation_number"));
+        staffRoom.setNumberOfRooms(rs.getInt("number_of_rooms"));
         return staffRoom;
     }
 }
