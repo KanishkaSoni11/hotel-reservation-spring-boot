@@ -16,7 +16,14 @@ public class StaffRoomDaoImp implements StaffRoomDao{
     }
 
     public List<StaffRoom> getAllRooms() {
-        String sql = "call staff_room_proc();";
-        return jdbcTemplate.query(sql, new StaffRoomRowMapper());
+        try {
+            String sql = "call staff_room_proc();";
+            System.out.println(sql);
+            System.out.println(jdbcTemplate.query(sql, new StaffRoomRowMapper()));
+            return jdbcTemplate.query(sql, new StaffRoomRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,24 @@ public class ReservationController {
     public List<StaffRoom> getAllRooms() {
         try {
             logger.info("fetching ");
-            return reservationService.getAllRooms();
+            List<StaffRoom> resList = reservationService.getAllRooms();
+
+            List<StaffRoom> finalList = new ArrayList<>();
+            for (int i = 0; i < resList.size(); i++) {
+                if (resList.get(i).getNumberOfRooms() > 1) {
+                    for (int j = 0; j < resList.get(i).getNumberOfRooms(); j++) {
+                        StaffRoom staffRoom = new StaffRoom(resList.get(i).getFirstName(),
+                                resList.get(i).getDate_from(), resList.get(i).getDateTo(), resList.get(i).getTypeOfRoom(),
+                                resList.get(i).getReservationNumber(), j+1);
+                        finalList.add(staffRoom);
+                    }
+
+                } else {
+                    finalList.add(resList.get(i));
+                }
+            }
+
+            return finalList;
         } catch (Exception e) {
             logger.error("Invalid credentials");
             return null;
@@ -60,15 +78,31 @@ public class ReservationController {
         }
     }
 
+//    @GetMapping("/room/{reservationId}")
+//    public List<Room> getRoomFromReservationId(@PathVariable int reservationId) {
+//        return reservationService.getRoomFromReservationId(reservationId);
+//    }
+//
+//    @GetMapping("/{customerId}")
+//    public Reservation getReservationFromCustomerId(@PathVariable String customerId) {
+//        try {
+//            logger.info("fetching ");
+//            return reservationService.getReservationFromCustomerId(customerId);
+//        } catch (Exception e) {
+//            logger.error("Invalid credentials");
+//            return null;
+//        }
+//    }
+
     @PostMapping("/assignroom")
     public ReservationAssignment assignRoom(@RequestBody ReservationAssignment reservationAssignment) {
-        try{
+        try {
             System.out.println(reservationAssignment.getReservationNumber());
             System.out.println(reservationAssignment.getRoomNumber());
             System.out.println(reservationAssignment.getStaffId());
             logger.info(reservationAssignment.toString());
             reservationService.assignRoom(reservationAssignment);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("Error");
         }
         return null;

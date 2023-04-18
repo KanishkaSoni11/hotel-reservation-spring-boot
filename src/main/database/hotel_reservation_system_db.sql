@@ -465,7 +465,7 @@ delimiter
 
 create procedure staff_room_proc()
 begin
-select first_name, date_from, date_to, type_of_room
+select first_name, date_from, date_to, type_of_room, number_of_rooms
 from reservation
          join
      reservation_placed on reservation_placed.reservation_id = reservation.reservation_number
@@ -475,8 +475,10 @@ end
 
 delimiter ;
 
+
 drop procedure if exists get_available_rooms_staff;
-delimiter //
+delimiter
+//
 
 create procedure get_available_rooms_staff(in p_room_type varchar (10),
                                            in p_date_from date,
@@ -497,10 +499,104 @@ end
 delimiter ;
 
 drop trigger if exists room_assigment_trigger;
-delimiter //
+delimiter
+//
 create trigger room_assigment_trigger
-    after insert on reservation_assignment
+    after insert
+    on reservation_assignment
     for each row
 begin
     update room set availability_status = 'Not Available' where room_number = new.room_number;
 end//
+
+drop procedure if exists pending_food_orders;
+delimiter
+//
+
+create procedure pending_food_orders()
+begin
+select o1.room_number, f.item_name, o2.quantity
+from order_details o1
+         join order_food_link o2
+              on o1.order_id = o2.order_id
+         join food_item f on f.item_id = o2.item_id
+where o1.order_status = "Pending";
+end
+//
+delimiter ;
+
+drop procedure if exists staff_check_in;
+delimiter
+//
+
+create procedure staff_check_in(
+    in p_reservation_number int,
+    in p_staff_id int,
+    in p_room_number int,
+    in p_res_status varchar (10)
+)
+begin
+	declare
+v_room_cost decimal(12,2);
+
+select cost
+into v_room_cost
+from room
+where room_number = p_room_number;
+insert into reservation_assignment
+values (p_reservation_number, p_staff_id, p_room_number, p_res_status);
+insert into bill_details (room_number, cost, bill_description, payment_method, payment_details, bill_date)
+values (p_room_number, v_room_cost, "Room Cost", "Credit Card", "XXXX-XXXX-XXXX-XXXX", sysdate());
+select *
+from reservation_assignment
+where reservation_number = p_reservation_number;
+end
+//
+
+delimiter ;
+
+drop procedure if exists pending_food_orders;
+delimiter //
+
+create procedure pending_food_orders()
+begin
+select o1.room_number, f.item_name, o2.quantity
+from order_details o1
+         join order_food_link o2
+              on o1.order_id = o2.order_id
+         join food_item f on f.item_id = o2.item_id
+where o1.order_status = "Pending";
+end //
+
+delimiter ;
+
+drop procedure if exists completed_food_orders;
+delimiter
+//
+
+create procedure completed_food_orders(in p_staff_id int,
+                                       in p_order_id int)
+begin
+insert into order_food_link
+values (p_order_id, p_staff_id);
+update order_details
+set order_status = "Completed"
+where order_id = p_order_id;
+end
+//
+delimiter ;
+
+
+drop function if exists sum_bill_details;
+delimiter //
+create function sum_bill_details (p_room_number int) returns int
+    deterministic reads sql data
+begin
+	declare  v_sum int;
+select sum(total_cost)into v_sum from order_details
+where room_number = p_room_number;
+
+return v_sum;
+end;//
+
+delimiter ;

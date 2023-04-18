@@ -55,7 +55,6 @@ begin
 end $$
 delimiter ;
 
-
 delimiter $$
 create procedure update_order_cost_bill(
 p_order_id int,

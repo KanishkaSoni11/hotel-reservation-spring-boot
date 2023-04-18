@@ -5,8 +5,8 @@ import com.example.hotelreservation.model.FoodItem;
 import com.example.hotelreservation.model.OrderDetails;
 import com.example.hotelreservation.model.OrderFoodDetails;
 
+import com.example.hotelreservation.model.PendingFoodOrders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -16,8 +16,18 @@ import java.util.Map;
 @Service
 public class FoodItemServiceImpl implements FoodItemService {
 
-	@Autowired
-	private FoodItemDao foodItemDao;
+    @Autowired
+    private FoodItemDao foodItemDao;
+
+
+    public List<PendingFoodOrders> getPendingOrders() {
+        return foodItemDao.getPendingOrders();
+    }
+
+    @Override
+    public OrderDetails updateCompletedOrder(int staffId, int orderId) {
+        return foodItemDao.updateCompletedOrder(staffId, orderId);
+    }
 
 	@Override
 	public List<FoodItem> getAllFoodItems() {

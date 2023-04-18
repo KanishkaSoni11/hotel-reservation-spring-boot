@@ -68,16 +68,22 @@ public class ReservationDaoImpl implements ReservationDao{
 
     @Override
     public ReservationAssignment assignRoom(ReservationAssignment reservationAssignment) {
-        String sql = "insert into reservation_assignment values (?, ?, ?, ?);";
+        try{
+            String sql = "call staff_check_in(?, ?, ? ,?)";
 
-         jdbcTemplate.update(sql,
-                 reservationAssignment.getReservationNumber(),
-                 reservationAssignment.getStaffId(),
-                 reservationAssignment.getRoomNumber(),
-                 "Checked-in"
-                 );
+            jdbcTemplate.queryForObject(sql, new ReservationAssignmentRowMapper(),
+                    reservationAssignment.getReservationNumber(),
+                    reservationAssignment.getStaffId(),
+                    reservationAssignment.getRoomNumber(),
+                    "Checked-in"
+            );
 
-         return reservationAssignment;
+            return reservationAssignment;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @Override
@@ -94,4 +100,5 @@ public class ReservationDaoImpl implements ReservationDao{
             return null;
         }
     }
+
 }
