@@ -1,7 +1,9 @@
 package com.example.hotelreservation.service;
 
 import com.example.hotelreservation.dao.ReservationDao;
+import com.example.hotelreservation.dao.RoomDao;
 import com.example.hotelreservation.dao.StaffRoomDao;
+import com.example.hotelreservation.model.Customer;
 import com.example.hotelreservation.model.Reservation;
 import com.example.hotelreservation.model.ReservationDetails;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.hotelreservation.model.ReservationAssignment;
+import com.example.hotelreservation.model.Room;
 import com.example.hotelreservation.model.StaffRoom;
 
 import java.util.List;
@@ -25,6 +28,9 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Autowired
     public StaffRoomDao staffRoomDao;
+
+    @Autowired
+    private RoomDao roomDao;
 
     @Override
     public Reservation getAllReservation() {
@@ -56,5 +62,13 @@ public class ReservationServiceImpl implements ReservationService{
         return reservationDao.assignRoom(reservationAssignment);
     }
 
+    @Override
+    public Reservation getReservationFromCustomerId(String customerId) {
+        return reservationDao.getReservationFromCustomerId(customerId);
+    }
 
+    @Override
+    public List<Room> getRoomFromReservationId(int reservationId) {
+        return roomDao.getRoomFromReservationId(reservationId);
+    }
 }
