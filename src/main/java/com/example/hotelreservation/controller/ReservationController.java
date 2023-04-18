@@ -78,6 +78,22 @@ public class ReservationController {
         }
     }
 
+//    @GetMapping("/room/{reservationId}")
+//    public List<Room> getRoomFromReservationId(@PathVariable int reservationId) {
+//        return reservationService.getRoomFromReservationId(reservationId);
+//    }
+//
+//    @GetMapping("/{customerId}")
+//    public Reservation getReservationFromCustomerId(@PathVariable String customerId) {
+//        try {
+//            logger.info("fetching ");
+//            return reservationService.getReservationFromCustomerId(customerId);
+//        } catch (Exception e) {
+//            logger.error("Invalid credentials");
+//            return null;
+//        }
+//    }
+
     @PostMapping("/assignroom")
     public ReservationAssignment assignRoom(@RequestBody ReservationAssignment reservationAssignment) {
         try {

@@ -20,6 +20,7 @@ public class FoodItemDaoImpl implements FoodItemDao {
 
     private static final Logger logger = LogManager.getLogger(FoodItemDaoImpl.class);
 
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -96,4 +97,6 @@ public class FoodItemDaoImpl implements FoodItemDao {
             return null;
         }
     }
+
+
 }

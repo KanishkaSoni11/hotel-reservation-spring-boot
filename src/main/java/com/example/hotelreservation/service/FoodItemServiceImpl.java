@@ -21,6 +21,7 @@ public class FoodItemServiceImpl implements FoodItemService {
     @Autowired
     private FoodItemDao foodItemDao;
 
+
     @Override
     public List<FoodItem> getAllFoodItems() {
         return foodItemDao.getAllFoodItems();
@@ -46,4 +47,5 @@ public class FoodItemServiceImpl implements FoodItemService {
         return foodItemDao.callProcedureToUpdateCostAndBill(orderDetails.getOrderId(), orderFoodDetails.getRoomNumber());
 
     }
+
 }

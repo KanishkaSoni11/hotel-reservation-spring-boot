@@ -3,7 +3,11 @@ package com.example.hotelreservation.controller;
 import com.example.hotelreservation.model.FoodItem;
 import com.example.hotelreservation.model.OrderDetails;
 
+
 import com.example.hotelreservation.model.PendingFoodOrders;
+
+import com.example.hotelreservation.model.OrderFoodDetails;
+
 
 import com.example.hotelreservation.model.OrderFoodDetails;
 
@@ -62,6 +66,7 @@ public class FoodItemController {
         logger.info("Fetching available food items");
         return foodItemService.updateCompletedOrder(staffId, orderId);
     }
+
     @PostMapping("/placeOrder")
     public OrderDetails placeOrder(@RequestBody OrderFoodDetails orderFoodDetails) {
         logger.info("Placing food order");
