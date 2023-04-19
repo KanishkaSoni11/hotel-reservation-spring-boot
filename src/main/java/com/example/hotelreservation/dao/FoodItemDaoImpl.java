@@ -4,6 +4,7 @@ import com.example.hotelreservation.model.FoodItem;
 import com.example.hotelreservation.model.OrderDetails;
 
 import com.example.hotelreservation.model.OrderDetails;
+import com.example.hotelreservation.model.OrderHistoryItem;
 import com.example.hotelreservation.model.PendingFoodOrders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -93,6 +94,17 @@ public class FoodItemDaoImpl implements FoodItemDao {
                     orderId, roomNumber, formatter.format(date));
         } catch (Exception e) {
 
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<OrderHistoryItem> callProcedureToFetchOrders(Integer customerId) {
+        try {
+            String sql = "call customer_order_history(?)";
+            return jdbcTemplate.query(sql, new OrderHistoryRowMapper(), customerId);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
