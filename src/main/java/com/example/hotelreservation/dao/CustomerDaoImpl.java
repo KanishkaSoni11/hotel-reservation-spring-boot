@@ -23,12 +23,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Customer registerCustomer(Customer customer) {
 		try {
-			String query = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(query,
-					customer.getCustomerID(), customer.getFirstName(), customer.getLastName(),
+					customer.getFirstName(), customer.getLastName(),
 					customer.getStreet(), customer.getState(), customer.getZipCode(),
-					customer.getEmailId(), customer.getContactNumber(), customer.getIdentificationNumber(),
-					customer.getPassword());
+					customer.getEmailId(), customer.getContactNumber(),
+					customer.getIdentificationNumber(), customer.getPassword());
 			return customer;
 		} catch(Exception e) {
 			logger.error("Exception while registering user");

@@ -5,6 +5,7 @@ import com.example.hotelreservation.model.FoodItem;
 import com.example.hotelreservation.model.OrderDetails;
 import com.example.hotelreservation.model.OrderFoodDetails;
 
+import com.example.hotelreservation.model.OrderHistoryItem;
 import com.example.hotelreservation.model.PendingFoodOrders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class FoodItemServiceImpl implements FoodItemService {
 			foodItemDao.insertIntoOrderFoodLink(orderDetails.getOrderId(), foodItemQuantity.getKey(), foodItemQuantity.getValue());
 		}
 		return foodItemDao.callProcedureToUpdateCostAndBill(orderDetails.getOrderId(), orderFoodDetails.getRoomNumber());
+	}
+
+	@Override
+	public List<OrderHistoryItem> getOrderHistoryFromCustomerId(Integer customerId) {
+		return foodItemDao.callProcedureToFetchOrders(customerId);
 	}
 }

@@ -2,6 +2,7 @@ package com.example.hotelreservation.dao;
 
 import com.example.hotelreservation.model.FoodItem;
 import com.example.hotelreservation.model.OrderDetails;
+import com.example.hotelreservation.model.OrderHistoryItem;
 import com.example.hotelreservation.model.PendingFoodOrders;
 
 import java.util.List;
@@ -19,5 +20,7 @@ public interface FoodItemDao {
 	public Integer insertIntoOrderFoodLink(Integer orderId, Integer foodItemId, Integer quantity);
 
 	public OrderDetails callProcedureToUpdateCostAndBill(Integer orderId, Integer roomNumber);
+
+	public List<OrderHistoryItem> callProcedureToFetchOrders(Integer customerId);
 
 }

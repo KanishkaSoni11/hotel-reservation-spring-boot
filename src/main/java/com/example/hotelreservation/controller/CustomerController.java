@@ -40,7 +40,6 @@ public class CustomerController {
 	@PostMapping("/register")
 	public Customer registerCustomer(@RequestBody Customer customer) {
 		logger.info(customer);
-		customer.setCustomerID(UUID.randomUUID().toString());
 		customer.setIdentificationNumber(UUID.randomUUID().toString());
 		return customerService.registerCustomer(customer);
 	}

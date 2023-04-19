@@ -2,6 +2,7 @@ package com.example.hotelreservation.controller;
 
 import com.example.hotelreservation.model.FoodItem;
 import com.example.hotelreservation.model.OrderDetails;
+import com.example.hotelreservation.model.OrderHistoryItem;
 import com.example.hotelreservation.model.PendingFoodOrders;
 
 import com.example.hotelreservation.model.OrderFoodDetails;
@@ -64,6 +65,12 @@ public class FoodItemController {
     public OrderDetails placeOrder(@RequestBody OrderFoodDetails orderFoodDetails) {
         logger.info("Placing food order");
         return foodItemService.placeOrder(orderFoodDetails);
+    }
+
+    @GetMapping("/orderHistory/{customerId}")
+    public List<OrderHistoryItem> getOrderHistoryFromCustomerId(@PathVariable Integer customerId) {
+        logger.info("Getting order history for the customer {}",customerId);
+        return foodItemService.getOrderHistoryFromCustomerId(customerId);
     }
 }
 
