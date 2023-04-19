@@ -33,12 +33,12 @@ public class CustomerController {
         return "customerService.getAllAuthors();";
     }
 
-	@PostMapping("/register")
-	public Customer registerCustomer(@RequestBody Customer customer) {
-		logger.info(customer);
-		customer.setIdentificationNumber(UUID.randomUUID().toString());
-		return customerService.registerCustomer(customer);
-	}
+    @PostMapping("/register")
+    public Customer registerCustomer(@RequestBody Customer customer) {
+        logger.info(customer);
+        customer.setIdentificationNumber(UUID.randomUUID().toString());
+        return customerService.registerCustomer(customer);
+    }
 
 
     @PostMapping("/login")
