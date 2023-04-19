@@ -57,13 +57,13 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public Customer checkoutCustomer(int customerId, int reservationNumber) {
+	public Customer checkoutCustomer(int customerId, int roomNumber) {
 		try{
 			System.out.println(customerId);
-			System.out.println(reservationNumber);
+			System.out.println(roomNumber);
 			String query = "call checkout_customer(?,?)";
-			jdbcTemplate.queryForObject(query, Integer.class, customerId, reservationNumber);
-			return null;
+			return  jdbcTemplate.queryForObject(query, new CustomerRowMapper(), customerId, roomNumber);
+
 		}catch (Exception e){
 			e.printStackTrace();
 			return null;

@@ -35,7 +35,7 @@ CREATE TABLE `bill_details` (
                                 PRIMARY KEY (`bill_id`),
                                 KEY `room_number` (`room_number`),
                                 CONSTRAINT `bill_details_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `bill_details` (
 
 LOCK TABLES `bill_details` WRITE;
 /*!40000 ALTER TABLE `bill_details` DISABLE KEYS */;
+INSERT INTO `bill_details` VALUES (10,1,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(11,2,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(12,3,200.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(13,4,200.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(14,5,200.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(15,6,200.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(16,7,200.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(17,8,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(18,9,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(19,11,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(20,12,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(21,13,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(22,14,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(23,15,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(24,16,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(25,17,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(26,18,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19'),(27,19,100.00,'Room Cost','Credit Card','XXXX-XXXX-XXXX-XXXX','2023-04-19');
 /*!40000 ALTER TABLE `bill_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,12 +62,12 @@ CREATE TABLE `customer` (
                             `street` varchar(50) NOT NULL,
                             `state` varchar(20) NOT NULL,
                             `zipcode` int NOT NULL,
-                            `email_id` varchar(100) NOT NULL,
+                            `email_id` varchar(100) NOT NULL unique,
                             `contact_no` int NOT NULL,
                             `identification_number` varchar(50) NOT NULL,
                             `password` varchar(20) DEFAULT NULL,
                             PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +76,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'first','Last','street','state',2215,'a@gmail.com',343333333,'avc','abc');
+INSERT INTO `customer` VALUES (1,'first','Last','street','state',2215,'a@gmail.com',343333333,'avc','abc'),(2,'first','Last','street','state',2215,'a2@gmail.com',343333333,'avc','abc'),(3,'first','Last','street','state',2215,'b@gmail.com',343333333,'avc','abc'),(4,'first','Last','street','state',2215,'c@gmail.com',343333333,'avc','abc'),(5,'first','Last','street','state',2215,'d@gmail.com',343333333,'avc','abc');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +94,7 @@ CREATE TABLE `food_item` (
                              `item_available` tinyint(1) NOT NULL,
                              `cost` decimal(10,2) NOT NULL,
                              PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +122,7 @@ CREATE TABLE `order_details` (
                                  PRIMARY KEY (`order_id`),
                                  KEY `room_number` (`room_number`),
                                  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +131,6 @@ CREATE TABLE `order_details` (
 
 LOCK TABLES `order_details` WRITE;
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
-INSERT INTO `order_details` VALUES (2,3.00,2,'Pending');
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +142,7 @@ DROP TABLE IF EXISTS `order_food_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_food_link` (
-                                   `order_id` int NOT NULL ,
+                                   `order_id` int NOT NULL,
                                    `item_id` int NOT NULL,
                                    `quantity` int NOT NULL,
                                    PRIMARY KEY (`order_id`,`item_id`,`quantity`),
@@ -158,7 +158,6 @@ CREATE TABLE `order_food_link` (
 
 LOCK TABLES `order_food_link` WRITE;
 /*!40000 ALTER TABLE `order_food_link` DISABLE KEYS */;
-INSERT INTO `order_food_link` VALUES (2,1,2);
 /*!40000 ALTER TABLE `order_food_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +169,7 @@ DROP TABLE IF EXISTS `order_staff_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_staff_link` (
-                                    `order_id` int NOT NULL ,
+                                    `order_id` int NOT NULL,
                                     `staff_id` int NOT NULL,
                                     PRIMARY KEY (`order_id`,`staff_id`),
                                     KEY `staff_id` (`staff_id`),
@@ -188,7 +187,7 @@ LOCK TABLES `order_staff_link` WRITE;
 /*!40000 ALTER TABLE `order_staff_link` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
+--
 -- Table structure for table `reservation`
 --
 
@@ -204,7 +203,7 @@ CREATE TABLE `reservation` (
                                `date_from` date NOT NULL,
                                `date_to` date NOT NULL,
                                PRIMARY KEY (`reservation_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +212,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (103,2,2,'KING','2023-04-19','2023-04-20','2023-04-28'),(104,2,2,'KING','2023-04-19','2023-05-05','2023-05-03'),(105,3,3,'KING','2023-04-19','2023-04-19','2023-04-21'),(106,5,3,'KING','2023-04-19','2023-04-28','2023-05-03'),(107,5,3,'KING','2023-04-19','2023-04-28','2023-05-03'),(108,5,3,'KING','2023-04-19','2023-04-21','2023-05-02'),(109,3,3,'KING','2023-04-19','2023-04-21','2023-05-02'),(110,2,3,'KING','2023-04-19','2023-04-21','2023-05-02'),(111,1,3,'KING','2023-04-19','2023-04-21','2023-05-02'),(112,4,3,'KING','2023-04-19','2023-05-31','2023-06-20'),(113,4,3,'KING','2023-04-19','2023-10-12','2023-11-21'),(114,5,4,'KING','2023-04-19','2023-04-20','2023-05-03'),(115,4,5,'KING','2023-04-19','2023-04-13','2023-04-25'),(116,5,2,'KING','2023-04-19','2023-04-20','2023-05-02');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,6 +243,7 @@ CREATE TABLE `reservation_assignment` (
 
 LOCK TABLES `reservation_assignment` WRITE;
 /*!40000 ALTER TABLE `reservation_assignment` DISABLE KEYS */;
+INSERT INTO `reservation_assignment` VALUES (104,1,1,'Check-out'),(104,1,2,'Check-out'),(105,1,3,'Check-out'),(105,1,4,'Check-out'),(105,1,5,'Check-out'),(114,1,6,'Check-out'),(114,1,7,'Check-out'),(114,1,8,'Check-out'),(114,1,9,'Check-out'),(114,1,11,'Check-out'),(115,1,12,'Check-out'),(115,1,13,'Check-out'),(115,1,14,'Checked-in'),(115,1,15,'Checked-in'),(116,1,16,'Checked-in'),(116,1,17,'Checked-in'),(116,1,18,'Checked-in'),(116,1,19,'Checked-in');
 /*!40000 ALTER TABLE `reservation_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -279,29 +280,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `check_out_trigger` AFTER UPDATE ON `reservation_assignment` FOR EACH ROW begin
-		-- declare  v_room_number int;
---         declare  v_res_id int;
--- 	    select reservation_number, room_number  into v_res_id, v_room_number from reservation_assignment 
---         where res_status = new.res_status;
-        
-        delete from reservation where reservation_number = new.reservation_number;
-    
-end */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `reservation_placed`
@@ -326,6 +304,7 @@ CREATE TABLE `reservation_placed` (
 
 LOCK TABLES `reservation_placed` WRITE;
 /*!40000 ALTER TABLE `reservation_placed` DISABLE KEYS */;
+INSERT INTO `reservation_placed` VALUES (1,104),(2,105),(3,114),(4,115),(5,116);
 /*!40000 ALTER TABLE `reservation_placed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,7 +330,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'King','Not Available',100.00),(2,'King','Not Available',100.00),(3,'King','Available',200.00);
+INSERT INTO `room` VALUES (1,'King','Not Available',100.00),(2,'King','Not Available',100.00),(3,'King','Not Available',200.00),(4,'King','Not Available',200.00),(5,'King','Not Available',200.00),(6,'King','Not Available',200.00),(7,'King','Not Available',200.00),(8,'King','Not Available',100.00),(9,'King','Not Available',100.00),(11,'King','Not Available',100.00),(12,'King','Not Available',100.00),(13,'King','Not Available',100.00),(14,'King','Not Available',100.00),(15,'King','Not Available',100.00),(16,'King','Not Available',100.00),(17,'King','Not Available',100.00),(18,'King','Not Available',100.00),(19,'King','Not Available',100.00),(20,'King','Available',100.00);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,18 +343,18 @@ DROP TABLE IF EXISTS `staff`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `staff` (
                          `staff_id` int NOT NULL AUTO_INCREMENT,
-                         `first_name` varchar(60) NOT NULL ,
+                         `first_name` varchar(60) NOT NULL,
                          `last_name` varchar(60) NOT NULL,
                          `street` varchar(50) NOT NULL,
                          `state` varchar(20) NOT NULL,
                          `zipcode` int NOT NULL,
-                         `email_id` varchar(100) NOT NULL,
+                         `email_id` varchar(100) NOT NULL unique,
                          `contact_no` int NOT NULL,
                          `salary` decimal(12,2) NOT NULL,
                          `joining_date` date NOT NULL,
                          `password` varchar(20) DEFAULT NULL,
                          PRIMARY KEY (`staff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +363,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (1,'A','B','123','MA',2215,'a@gmail.com',999999,12345.00,'2022-01-01','abc'),(11,'A','B','123','MA',2215,'a@gmail.com',999999,12345.00,'2022-01-01','abc'),(112,'A','B','123','MA',2215,'a@gmail.com',999999,12345.00,'2022-01-01','xyz');
+INSERT INTO `staff` VALUES (1,'A','B','123','MA',2215,'a@gmail.com',999999,12345.00,'2022-01-01','abc'),(11,'A','B','123','MA',2215,'a1@gmail.com',999999,12345.00,'2022-01-01','abc'),(112,'A','B','123','MA',2215,'a2@gmail.com',999999,12345.00,'2022-01-01','xyz');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -493,6 +472,31 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `active_reservation_proc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `active_reservation_proc`()
+begin
+select  c.first_name,r3.date_from, r3.date_to, r3.type_of_room, r1.reservation_number, r1.room_number,c.customer_id
+from reservation_assignment r1 join reservation_placed r2 on
+        r1.reservation_number = r2.reservation_id
+                               join reservation r3 on r3.reservation_number = r1.reservation_number
+                               join customer c
+                                    on c.customer_id = r2.customer_id
+where r1.res_status = "Checked-in";
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `add_to_bill_details_proc` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -530,16 +534,12 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `checkout_customer`(in p_customer_id int,
-in p_reservation_number int)
-begin	
-	declare v_room_number int;
+in p_room_number int)
+begin
 
-
-select room_number into v_room_number from reservation_assignment where reservation_number = p_reservation_number;
-select sum_bill_details(v_room_number);
-update reservation_assignment set res_status = "Check-out" where reservation_number= p_reservation_number;
-delete from bill_details where room_number = v_room_number;
-delete from order_details where room_number = v_room_number;
+update reservation_assignment set res_status = "Check-out" where room_number  = p_room_number;
+-- delete from bill_details where room_number = p_room_number;
+-- delete from order_details where room_number = p_room_number;
 select * from customer where customer_id = p_customer_id;
 
 end ;;
@@ -594,6 +594,36 @@ select max(reservation_number) into max_id from reservation;
 insert into reservation values (max_id + 1, p_num_room, p_num_guests, p_room_type, p_date_of_res, p_from_date, p_to_date);
 insert into reservation_placed values (customer_id, max_id + 1);
 select * from reservation where reservation_number = max_id + 1;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `customer_order_history` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `customer_order_history`(
+in p_customer_id int)
+begin
+select od.order_id, od.room_number, fi.item_name, ofl.quantity, od.order_status  from order_details od
+                                                                                          join order_food_link ofl
+                                                                                               on od.order_id = ofl.order_id
+                                                                                          join food_item fi
+                                                                                               on fi.item_id = ofl.item_id
+where od.room_number in (
+    select room_number from reservation_assignment ra
+                                join reservation_placed rp
+                                     on ra.reservation_number = rp.reservation_id
+    where rp.customer_id = p_customer_id
+);
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -663,9 +693,9 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `staff_check_in`(
-in p_reservation_number int, 
-in p_staff_id int, 
-in p_room_number int, 
+in p_reservation_number int,
+in p_staff_id int,
+in p_room_number int,
 in p_res_status varchar(10)
 )
 begin
@@ -675,7 +705,7 @@ select cost into v_room_cost from room where room_number = p_room_number;
 insert into reservation_assignment values(p_reservation_number, p_staff_id, p_room_number, p_res_status);
 insert into bill_details (room_number, cost, bill_description, payment_method, payment_details, bill_date) values(
                                                                                                                      p_room_number, v_room_cost, "Room Cost", "Credit Card", "XXXX-XXXX-XXXX-XXXX", sysdate());
-select * from reservation_assignment where reservation_number = p_reservation_number;
+select * from reservation_assignment where reservation_number = p_reservation_number and room_number = p_room_number;
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -694,11 +724,16 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `staff_room_proc`()
 begin
-select first_name, date_from, date_to, type_of_room, reservation_number, number_of_rooms
+declare num_rooms int;
+
+select first_name, date_from, date_to, type_of_room, reservation_number, (number_of_rooms- (
+    select count(*) from reservation_assignment r1 where r1.reservation_number =  reservation.reservation_number)) as number_of_rooms
 from reservation
          join
      reservation_placed on reservation_placed.reservation_id = reservation.reservation_number
-         join customer on customer.customer_id = reservation_placed.customer_id;
+         join customer on customer.customer_id = reservation_placed.customer_id
+where reservation_number not in (select reservation_number from reservation_assignment
+                                 where  res_status ='Check-out');
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -747,4 +782,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-18 22:13:23
+-- Dump completed on 2023-04-19 18:07:38

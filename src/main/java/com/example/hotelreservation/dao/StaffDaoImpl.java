@@ -1,5 +1,7 @@
 package com.example.hotelreservation.dao;
 
+import com.example.hotelreservation.model.ActiveReservationDetails;
+import com.example.hotelreservation.model.ReservationAssignment;
 import com.example.hotelreservation.model.Staff;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -31,5 +33,19 @@ public class StaffDaoImpl implements StaffDao {
     public Staff loginStaff(int staffId, String password) {
         String sql = "select * from staff where staff_id = ? and password = ?;";
         return jdbcTemplate.queryForObject(sql, new StaffRowMapper(), staffId, password);
+    }
+
+    @Override
+    public List<ActiveReservationDetails> activeReservations() {
+        try{
+            String sql = "call active_reservation_proc();";
+            System.out.println(jdbcTemplate.query(sql, new ActiveReservationRowMapper()));
+            return jdbcTemplate.query(sql, new ActiveReservationRowMapper());
+        }catch (Exception e){
+            System.out.println("here ");
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

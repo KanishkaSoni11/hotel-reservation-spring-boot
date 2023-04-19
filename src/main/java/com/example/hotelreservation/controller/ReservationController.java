@@ -50,7 +50,7 @@ public class ReservationController {
                         finalList.add(staffRoom);
                     }
 
-                } else {
+                } else if(resList.get(i).getNumberOfRooms() == 1) {
                     finalList.add(resList.get(i));
                 }
             }
@@ -101,10 +101,12 @@ public class ReservationController {
             System.out.println(reservationAssignment.getRoomNumber());
             System.out.println(reservationAssignment.getStaffId());
             logger.info(reservationAssignment.toString());
-            reservationService.assignRoom(reservationAssignment);
+            return reservationService.assignRoom(reservationAssignment);
+
         } catch (Exception e) {
             logger.error("Error");
+            return null;
         }
-        return null;
+
     }
 }

@@ -1,11 +1,14 @@
 package com.example.hotelreservation.controller;
 
+import com.example.hotelreservation.model.ActiveReservationDetails;
 import com.example.hotelreservation.model.Staff;
 import com.example.hotelreservation.service.StaffService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class StaffController {
@@ -40,6 +43,17 @@ public class StaffController {
             return staffService.loginStaff(staff.getStaffId(), staff.getPassword());
         } catch (Exception e) {
             logger.error("Invalid credentials");
+            return null;
+        }
+    }
+
+    @GetMapping("/activeReservation")
+    public List<ActiveReservationDetails> getActiveReservations() {
+        try{
+            logger.info("Fetching active reservations");
+            return staffService.activeReservations();
+        }catch (Exception e) {
+            logger.error("Could not fetch");
             return null;
         }
     }
