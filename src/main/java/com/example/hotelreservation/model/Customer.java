@@ -6,7 +6,7 @@ public class Customer {
 
 	}
 
-	private String customerID;
+	private int customerID;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -17,11 +17,11 @@ public class Customer {
 	private int contactNumber;
 	private String identificationNumber;
 
-	public String getCustomerID() {
+	public int getCustomerID() {
 		return customerID;
 	}
 
-	public void setCustomerID(String customerID) {
+	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
 

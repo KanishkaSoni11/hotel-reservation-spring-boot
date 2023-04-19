@@ -3,6 +3,7 @@ package com.example.hotelreservation.service;
 import com.example.hotelreservation.dao.CustomerDao;
 import com.example.hotelreservation.model.Customer;
 
+import com.example.hotelreservation.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getCustomerByUserEmail(String userEmail) {
 		return customerDao.getCustomerByUserEmail(userEmail);
+	}
+
+	@Override
+	public Customer checkoutCustomer(int customerId, int reservationNumber) {
+		return customerDao.checkoutCustomer(customerId, reservationNumber);
 	}
 }

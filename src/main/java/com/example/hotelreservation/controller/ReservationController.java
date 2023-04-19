@@ -68,7 +68,7 @@ public class ReservationController {
     }
 
     @GetMapping("/{customerId}")
-    public Reservation getReservationFromCustomerId(@PathVariable String customerId) {
+    public Reservation getReservationFromCustomerId(@PathVariable int customerId) {
         try {
             logger.info("fetching ");
             return reservationService.getReservationFromCustomerId(customerId);

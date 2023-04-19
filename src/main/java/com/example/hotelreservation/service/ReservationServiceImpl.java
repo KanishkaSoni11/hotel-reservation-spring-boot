@@ -63,7 +63,7 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public Reservation getReservationFromCustomerId(String customerId) {
+    public Reservation getReservationFromCustomerId(int customerId) {
         return reservationDao.getReservationFromCustomerId(customerId);
     }
 
