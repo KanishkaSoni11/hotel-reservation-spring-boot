@@ -18,7 +18,7 @@ public interface ReservationService {
 
     public ReservationAssignment assignRoom(ReservationAssignment reservationAssignment);
 
-    public Reservation getReservationFromCustomerId(String customerId);
+    public Reservation getReservationFromCustomerId(int customerId);
 
     public List<Room> getRoomFromReservationId(int reservationId);
 }

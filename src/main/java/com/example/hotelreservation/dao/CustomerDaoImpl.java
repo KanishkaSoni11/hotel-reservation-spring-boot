@@ -3,6 +3,7 @@ package com.example.hotelreservation.dao;
 import com.example.hotelreservation.controller.CustomerController;
 import com.example.hotelreservation.model.Customer;
 
+import com.example.hotelreservation.model.Reservation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,21 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Customer getCustomerByUserEmail(String userEmail) {
 		String query = "SELECT * FROM CUSTOMER WHERE email = ?";
 		return jdbcTemplate.queryForObject(query, new CustomerRowMapper(), userEmail);
+	}
+
+	@Override
+	public Customer checkoutCustomer(int customerId, int reservationNumber) {
+		try{
+			System.out.println(customerId);
+			System.out.println(reservationNumber);
+			String query = "call checkout_customer(?,?)";
+			jdbcTemplate.queryForObject(query, Integer.class, customerId, reservationNumber);
+			return null;
+		}catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 
