@@ -29,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer checkoutCustomer(int customerId, int reservationNumber) {
-		return customerDao.checkoutCustomer(customerId, reservationNumber);
+	public Customer checkoutCustomer(int customerId, int roomNumber) {
+		return customerDao.checkoutCustomer(customerId, roomNumber);
 	}
 }

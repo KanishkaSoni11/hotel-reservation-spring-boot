@@ -11,5 +11,5 @@ public interface CustomerDao {
 
 	public Customer getCustomerByUserEmail(String userEmail);
 
-	public Customer checkoutCustomer(int customerId, int reservationNumber);
+	public Customer checkoutCustomer(int customerId, int roomNumber);
 }

@@ -1,5 +1,7 @@
 package com.example.hotelreservation.dao;
 
+import com.example.hotelreservation.model.ActiveReservationDetails;
+import com.example.hotelreservation.model.ReservationAssignment;
 import com.example.hotelreservation.model.Staff;
 
 import org.springframework.stereotype.Repository;
@@ -15,4 +17,6 @@ public interface StaffDao {
     public List<Staff> getAllStaff();
 
     public Staff loginStaff(int staffId, String password);
+
+    public List<ActiveReservationDetails> activeReservations();
 }

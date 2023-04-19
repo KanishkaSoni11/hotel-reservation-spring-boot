@@ -33,12 +33,12 @@ public class CustomerController {
         return "customerService.getAllAuthors();";
     }
 
-	@PostMapping("/register")
-	public Customer registerCustomer(@RequestBody Customer customer) {
-		logger.info(customer);
-		customer.setIdentificationNumber(UUID.randomUUID().toString());
-		return customerService.registerCustomer(customer);
-	}
+    @PostMapping("/register")
+    public Customer registerCustomer(@RequestBody Customer customer) {
+        logger.info(customer);
+        customer.setIdentificationNumber(UUID.randomUUID().toString());
+        return customerService.registerCustomer(customer);
+    }
 
 
     @PostMapping("/login")
@@ -53,9 +53,9 @@ public class CustomerController {
         return reservationService.makeReservation(reservationDetails);
     }
 
-    @PostMapping("/checkout/{customerId}/{reservationNumber}")
-    public Customer checkout(@PathVariable int customerId, @PathVariable int reservationNumber) {
+    @PostMapping("/checkout/{customerId}/{roomNumber}")
+    public Customer checkout(@PathVariable int customerId, @PathVariable int roomNumber) {
         logger.info("Checking out customer");
-        return customerService.checkoutCustomer(customerId, reservationNumber);
+        return customerService.checkoutCustomer(customerId, roomNumber);
     }
 }
