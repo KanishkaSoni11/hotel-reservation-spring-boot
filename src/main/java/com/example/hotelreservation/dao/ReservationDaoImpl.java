@@ -87,7 +87,7 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public Reservation getReservationFromCustomerId(String customerId) {
+    public Reservation getReservationFromCustomerId(int customerId) {
         try {
             String sql = "select r.* from reservation r "
                     + "join reservation_placed rp "

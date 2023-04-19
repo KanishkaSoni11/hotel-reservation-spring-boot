@@ -18,5 +18,5 @@ public interface ReservationDao {
 
     public Reservation createReservation(ReservationDetails reservationDetails, Customer customer);
 
-    public Reservation getReservationFromCustomerId(String customerId);
+    public Reservation getReservationFromCustomerId(int customerId);
 }
