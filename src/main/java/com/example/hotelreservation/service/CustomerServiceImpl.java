@@ -1,11 +1,14 @@
 package com.example.hotelreservation.service;
 
 import com.example.hotelreservation.dao.CustomerDao;
+import com.example.hotelreservation.model.BillDetails;
 import com.example.hotelreservation.model.Customer;
 
 import com.example.hotelreservation.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -31,5 +34,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer checkoutCustomer(int customerId, int roomNumber) {
 		return customerDao.checkoutCustomer(customerId, roomNumber);
+	}
+
+	@Override
+	public List<BillDetails> getBillDetails(int roomNumber) {
+		return customerDao.getBillDetails(roomNumber);
+	}
+
+	@Override
+	public Integer getTotalAmount(int roomNumber) {
+		return customerDao.getTotalAmount(roomNumber);
+	}
+
+	@Override
+	public Customer updateBillPaid(int roomNumber, int customerId) {
+		return customerDao.updateBillPaid(roomNumber, customerId);
 	}
 }

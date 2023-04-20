@@ -1,5 +1,6 @@
 package com.example.hotelreservation.model;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class BillDetails {
@@ -9,6 +10,11 @@ public class BillDetails {
 	private String paymentMethod;
 	private String paymentDetails;
 	private Date billDate;
+
+	private int cost;
+
+	private String billDescription;
+
 
 	public BillDetails() {
 		// Mandatory empty constructor
@@ -52,5 +58,21 @@ public class BillDetails {
 
 	public void setBillDate(Date billDate) {
 		this.billDate = billDate;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	public String getBillDescription() {
+		return billDescription;
+	}
+
+	public void setBillDescription(String billDescription) {
+		this.billDescription = billDescription;
 	}
 }
