@@ -1,5 +1,6 @@
 package com.example.hotelreservation.controller;
 
+import com.example.hotelreservation.model.BillDetails;
 import com.example.hotelreservation.model.Customer;
 import com.example.hotelreservation.model.Reservation;
 import com.example.hotelreservation.model.ReservationDetails;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -57,5 +59,28 @@ public class CustomerController {
     public Customer checkout(@PathVariable int customerId, @PathVariable int roomNumber) {
         logger.info("Checking out customer");
         return customerService.checkoutCustomer(customerId, roomNumber);
+    }
+
+    @GetMapping("/getBillDetails/{roomNumber}")
+    public List<BillDetails> getBillDetails(@PathVariable int roomNumber){
+        try{
+            return customerService.getBillDetails(roomNumber);
+
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return null;
+    }
+
+    @GetMapping("/totalAmount/{roomNumber}")
+    public Integer getTotalAmount(@PathVariable int roomNumber)  {
+        return customerService.getTotalAmount(roomNumber);
+
+    }
+
+    @GetMapping("/billPaid/{roomNumber}/{customerId}")
+    public Customer updateBillPaid(@PathVariable int roomNumber, @PathVariable int customerId){
+        return customerService.updateBillPaid(roomNumber,customerId);
+
     }
 }

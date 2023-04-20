@@ -16,6 +16,8 @@ public class BillDetailsRowMapper implements RowMapper<BillDetails> {
 		billDetails.setPaymentDetails(rs.getString("payment_details"));
 		billDetails.setPaymentMethod(rs.getString("payment_method"));
 		billDetails.setRoomNumber(rs.getInt("room_number"));
+		billDetails.setCost(rs.getInt("cost"));
+		billDetails.setBillDescription(rs.getString("bill_description"));
 		return billDetails;
 	}
 }
