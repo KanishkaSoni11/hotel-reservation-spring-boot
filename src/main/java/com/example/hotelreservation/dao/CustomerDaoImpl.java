@@ -24,13 +24,15 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public Customer registerCustomer(Customer customer) {
 		try {
-			String query = "INSERT INTO CUSTOMER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO CUSTOMER (first_name, last_name, street, state, zipcode, email_id, contact_no, identification_number, password)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(query,
 					customer.getFirstName(), customer.getLastName(),
 					customer.getStreet(), customer.getState(), customer.getZipCode(),
 					customer.getEmailId(), customer.getContactNumber(),
 					customer.getIdentificationNumber(), customer.getPassword());
-			return customer;
+			query = "select * from customer where email_id = ?";
+			return jdbcTemplate.queryForObject(query, new CustomerRowMapper(), customer.getEmailId());
 		} catch(Exception e) {
 			logger.error("Exception while registering user");
 			e.printStackTrace();
