@@ -29,10 +29,10 @@ public class CustomerController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("/customers")
-    public String getALlCustomers() {
-        logger.error("Fetching all authors");
-        return "customerService.getAllAuthors();";
+    @GetMapping("/healthCheck")
+    public String checkHealth() {
+        logger.info("Health check");
+        return "Health check successful";
     }
 
     @PostMapping("/register")
