@@ -134,7 +134,7 @@ CREATE TABLE `food_item` (
 
 LOCK TABLES `food_item` WRITE;
 /*!40000 ALTER TABLE `food_item` DISABLE KEYS */;
-INSERT INTO `food_item` VALUES (3,'Chicken Burger','Crispy seasoned chicken breast, topped cheese',1,25.00),(4,'Pasta','shrimp scampi pasta with Caesar salad',1,17.00),(5,'Veg Pizza ','Vegetarian Pizza with Garlic Bread',1,29.00),(6,'Salmon ','Grilled Salmon with Mashed Potatoes',1,27.00),(7,'Beef Burger','Beef Burger with Rings',1,23.00),(8,'Ramen','Chicken Rame',1,19.00),(9,'Ramen','Chicken Ramen',1,19.00),(10,'Pasta','Shrimp Scampi Pasta with Caesar salad',1,17.00);
+INSERT INTO `food_item` VALUES (3,'Chicken Burger','Crispy seasoned chicken breast, topped cheese',1,25.00),(5,'Veg Pizza ','Vegetarian Pizza with Garlic Bread',1,29.00),(6,'Salmon ','Grilled Salmon with Mashed Potatoes',1,27.00),(7,'Beef Burger','Beef Burger with Rings',1,23.00),(9,'Ramen','Chicken Ramen',1,19.00),(10,'Pasta','Shrimp Scampi Pasta with Caesar salad',1,17.00);
 /*!40000 ALTER TABLE `food_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +392,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (113,'Ema','James','Boylston','MA',2215,'ema@gmail.com',888777334,200000.00,'2022-01-01','pass'),(114,'John','Wick','Boylston','MA',2215,'john@gmail.com',999444555,250000.00,'2022-04-01','pass');
+INSERT INTO `staff` VALUES (113,'Emma','James','Boylston','MA',2215,'ema@gmail.com',888777334,200000.00,'2022-01-01','pass'),(114,'John','Wick','Boylston','MA',2215,'john@gmail.com',999444555,250000.00,'2022-04-01','pass');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
