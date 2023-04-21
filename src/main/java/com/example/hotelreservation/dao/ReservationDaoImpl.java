@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Repository
@@ -33,15 +34,16 @@ public class ReservationDaoImpl implements ReservationDao{
     }
 
     @Override
-    public Integer checkIfReservationIsPossible(Date fromDate, Date toDate, int numberOfRooms, RoomType roomType) {
+    public boolean checkIfReservationIsPossible(LocalDate fromDate, LocalDate toDate, int numberOfRooms, RoomType roomType) {
         try {
             String sql = "select isReservationPossible(?, ?, ? , ?)";
-            return jdbcTemplate.queryForObject(sql, Integer.class,
+            Integer out = jdbcTemplate.queryForObject(sql, Integer.class,
                     new Object[]{fromDate, toDate, numberOfRooms, roomType.getString()});
+            return out == 1;
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Unable to check for reservation");
-            return 0;
+            return false;
         }
     }
 
