@@ -72,6 +72,7 @@ DELIMITER ;;
 			 delete from reservation where reservation_number = v_res_id;
         end if;
 
+
 end */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -575,7 +576,7 @@ delete from bill_details where room_number = p_room_number;
 select * from customer where customer_id = p_customer_id;
 
 
-
+update room set availability_status = "Available" where room_number = p_room_number;
 select count(*) into count_num_rooms from reservation_assignment where reservation_number = v_res_id;
 
 
@@ -655,7 +656,7 @@ p_room_type varchar(100),
 customer_id int)
 begin
 	declare max_id int;
-select max(reservation_number) into max_id from reservation;
+select ifnull(max(reservation_number),0) into max_id from reservation;
 insert into reservation values (max_id + 1, p_num_room, p_num_guests, p_room_type, p_date_of_res, p_from_date, p_to_date);
 insert into reservation_placed values (customer_id, max_id + 1);
 select * from reservation where reservation_number = max_id + 1;
@@ -739,7 +740,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_order_details`(
 p_room_number int)
 begin
 	declare max_id int;
-select max(order_id) into max_id from order_details;
+select ifnull(max(order_id),0) into max_id from order_details;
 insert into order_details values (max_id + 1, 0, p_room_number, 'PENDING');
 select * from order_details where order_id = max_id + 1;
 end ;;
