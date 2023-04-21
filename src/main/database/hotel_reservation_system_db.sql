@@ -4,7 +4,7 @@ USE `hotel_reservation_system`;
 --
 -- Host: localhost    Database: hotel_reservation_system
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,16 +25,16 @@ DROP TABLE IF EXISTS `bill_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bill_details` (
-                                `bill_id` int NOT NULL AUTO_INCREMENT,
-                                `room_number` int NOT NULL,
-                                `cost` decimal(10,2) DEFAULT NULL,
-                                `bill_description` varchar(100) DEFAULT NULL,
-                                `payment_method` varchar(15) NOT NULL,
-                                `payment_details` varchar(100) NOT NULL,
-                                `bill_date` date NOT NULL,
-                                PRIMARY KEY (`bill_id`),
-                                KEY `room_number` (`room_number`),
-                                CONSTRAINT `bill_details_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
+  `bill_id` int NOT NULL AUTO_INCREMENT,
+  `room_number` int NOT NULL,
+  `cost` decimal(10,2) DEFAULT NULL,
+  `bill_description` varchar(100) DEFAULT NULL,
+  `payment_method` varchar(15) NOT NULL,
+  `payment_details` varchar(100) NOT NULL,
+  `bill_date` date NOT NULL,
+  PRIMARY KEY (`bill_id`),
+  KEY `room_number` (`room_number`),
+  CONSTRAINT `bill_details_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,18 +88,18 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-                            `customer_id` int NOT NULL AUTO_INCREMENT,
-                            `first_name` varchar(60) NOT NULL,
-                            `last_name` varchar(60) NOT NULL,
-                            `street` varchar(50) NOT NULL,
-                            `state` varchar(20) NOT NULL,
-                            `zipcode` int NOT NULL,
-                            `email_id` varchar(100) NOT NULL,
-                            `contact_no` int NOT NULL,
-                            `identification_number` varchar(50) NOT NULL,
-                            `password` varchar(20) DEFAULT NULL,
-                            PRIMARY KEY (`customer_id`),
-                            UNIQUE KEY `email_id` (`email_id`)
+  `customer_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(60) NOT NULL,
+  `last_name` varchar(60) NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `state` varchar(20) NOT NULL,
+  `zipcode` int NOT NULL,
+  `email_id` varchar(100) NOT NULL,
+  `contact_no` int NOT NULL,
+  `identification_number` varchar(50) NOT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `email_id` (`email_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -121,12 +121,12 @@ DROP TABLE IF EXISTS `food_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `food_item` (
-                             `item_id` int NOT NULL AUTO_INCREMENT,
-                             `item_name` varchar(20) NOT NULL,
-                             `item_desc` varchar(50) NOT NULL,
-                             `item_available` tinyint(1) NOT NULL,
-                             `cost` decimal(10,2) NOT NULL,
-                             PRIMARY KEY (`item_id`)
+  `item_id` int NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(20) NOT NULL,
+  `item_desc` varchar(50) NOT NULL,
+  `item_available` tinyint(1) NOT NULL,
+  `cost` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,13 +148,13 @@ DROP TABLE IF EXISTS `order_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_details` (
-                                 `order_id` int NOT NULL AUTO_INCREMENT,
-                                 `total_cost` decimal(10,2) NOT NULL,
-                                 `room_number` int NOT NULL,
-                                 `order_status` varchar(10) NOT NULL,
-                                 PRIMARY KEY (`order_id`),
-                                 KEY `room_number` (`room_number`),
-                                 CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `total_cost` decimal(10,2) NOT NULL,
+  `room_number` int NOT NULL,
+  `order_status` varchar(10) NOT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `room_number` (`room_number`),
+  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -175,13 +175,13 @@ DROP TABLE IF EXISTS `order_food_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_food_link` (
-                                   `order_id` int NOT NULL,
-                                   `item_id` int NOT NULL,
-                                   `quantity` int NOT NULL,
-                                   PRIMARY KEY (`order_id`,`item_id`,`quantity`),
-                                   KEY `item_id` (`item_id`),
-                                   CONSTRAINT `order_food_link_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-                                   CONSTRAINT `order_food_link_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `food_item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `order_id` int NOT NULL,
+  `item_id` int NOT NULL,
+  `quantity` int NOT NULL,
+  PRIMARY KEY (`order_id`,`item_id`,`quantity`),
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `order_food_link_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `order_food_link_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `food_item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -203,12 +203,12 @@ DROP TABLE IF EXISTS `order_staff_link`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_staff_link` (
-                                    `order_id` int NOT NULL,
-                                    `staff_id` int NOT NULL,
-                                    PRIMARY KEY (`order_id`,`staff_id`),
-                                    KEY `staff_id` (`staff_id`),
-                                    CONSTRAINT `order_staff_link_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-                                    CONSTRAINT `order_staff_link_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `order_id` int NOT NULL,
+  `staff_id` int NOT NULL,
+  PRIMARY KEY (`order_id`,`staff_id`),
+  KEY `staff_id` (`staff_id`),
+  CONSTRAINT `order_staff_link_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order_details` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `order_staff_link_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -230,14 +230,14 @@ DROP TABLE IF EXISTS `reservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reservation` (
-                               `reservation_number` int NOT NULL AUTO_INCREMENT,
-                               `number_of_rooms` int NOT NULL,
-                               `number_of_guests` int NOT NULL,
-                               `type_of_room` varchar(40) NOT NULL,
-                               `date_of_reservation` date NOT NULL,
-                               `date_from` date NOT NULL,
-                               `date_to` date NOT NULL,
-                               PRIMARY KEY (`reservation_number`)
+  `reservation_number` int NOT NULL AUTO_INCREMENT,
+  `number_of_rooms` int NOT NULL,
+  `number_of_guests` int NOT NULL,
+  `type_of_room` varchar(40) NOT NULL,
+  `date_of_reservation` date NOT NULL,
+  `date_from` date NOT NULL,
+  `date_to` date NOT NULL,
+  PRIMARY KEY (`reservation_number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -259,16 +259,16 @@ DROP TABLE IF EXISTS `reservation_assignment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reservation_assignment` (
-                                          `reservation_number` int NOT NULL,
-                                          `staff_id` int NOT NULL,
-                                          `room_number` int NOT NULL,
-                                          `res_status` varchar(10) DEFAULT NULL,
-                                          PRIMARY KEY (`reservation_number`,`staff_id`,`room_number`),
-                                          KEY `staff_id` (`staff_id`),
-                                          KEY `room_number` (`room_number`),
-                                          CONSTRAINT `reservation_assignment_ibfk_1` FOREIGN KEY (`reservation_number`) REFERENCES `reservation` (`reservation_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-                                          CONSTRAINT `reservation_assignment_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-                                          CONSTRAINT `reservation_assignment_ibfk_3` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
+  `reservation_number` int NOT NULL,
+  `staff_id` int NOT NULL,
+  `room_number` int NOT NULL,
+  `res_status` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`reservation_number`,`staff_id`,`room_number`),
+  KEY `staff_id` (`staff_id`),
+  KEY `room_number` (`room_number`),
+  CONSTRAINT `reservation_assignment_ibfk_1` FOREIGN KEY (`reservation_number`) REFERENCES `reservation` (`reservation_number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `reservation_assignment_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `reservation_assignment_ibfk_3` FOREIGN KEY (`room_number`) REFERENCES `room` (`room_number`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -324,12 +324,12 @@ DROP TABLE IF EXISTS `reservation_placed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reservation_placed` (
-                                      `customer_id` int NOT NULL,
-                                      `reservation_id` int NOT NULL,
-                                      PRIMARY KEY (`customer_id`,`reservation_id`),
-                                      KEY `reservation_id` (`reservation_id`),
-                                      CONSTRAINT `reservation_placed_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`reservation_number`) ON DELETE CASCADE ON UPDATE CASCADE,
-                                      CONSTRAINT `reservation_placed_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `customer_id` int NOT NULL,
+  `reservation_id` int NOT NULL,
+  PRIMARY KEY (`customer_id`,`reservation_id`),
+  KEY `reservation_id` (`reservation_id`),
+  CONSTRAINT `reservation_placed_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`reservation_number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `reservation_placed_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -351,11 +351,11 @@ DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
-                        `room_number` int NOT NULL,
-                        `room_type` varchar(60) NOT NULL,
-                        `availability_status` varchar(20) NOT NULL,
-                        `cost` decimal(12,2) NOT NULL,
-                        PRIMARY KEY (`room_number`)
+  `room_number` int NOT NULL,
+  `room_type` varchar(60) NOT NULL,
+  `availability_status` varchar(20) NOT NULL,
+  `cost` decimal(12,2) NOT NULL,
+  PRIMARY KEY (`room_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -365,7 +365,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'King','Not Available',100.00),(2,'King','Not Available',100.00),(3,'King','Not Available',200.00),(4,'King','Not Available',200.00),(5,'King','Not Available',200.00),(6,'King','Not Available',200.00),(7,'King','Not Available',200.00),(8,'King','Not Available',100.00),(9,'King','Not Available',100.00),(11,'King','Not Available',100.00),(12,'King','Not Available',100.00),(13,'King','Not Available',100.00),(14,'King','Not Available',100.00),(15,'King','Not Available',100.00),(16,'King','Not Available',100.00),(17,'King','Not Available',100.00),(18,'King','Not Available',100.00),(19,'King','Not Available',100.00),(20,'King','Available',100.00);
+INSERT INTO `room` VALUES (1,'King','Not Available',100.00),(2,'King','Not Available',100.00),(3,'King','Not Available',200.00),(4,'King','Not Available',200.00),(5,'King','Not Available',200.00),(6,'King','Not Available',200.00),(7,'King','Not Available',200.00),(8,'King','Not Available',100.00),(9,'King','Not Available',100.00),(11,'King','Not Available',100.00),(12,'King','Not Available',100.00),(13,'King','Not Available',100.00),(14,'King','Not Available',100.00),(15,'King','Not Available',100.00),(16,'King','Not Available',100.00),(17,'King','Not Available',100.00),(18,'King','Not Available',100.00),(19,'King','Not Available',100.00),(20,'King','Available',100.00),(21,'Suite','Availabl',200.00);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,19 +377,19 @@ DROP TABLE IF EXISTS `staff`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `staff` (
-                         `staff_id` int NOT NULL AUTO_INCREMENT,
-                         `first_name` varchar(60) NOT NULL,
-                         `last_name` varchar(60) NOT NULL,
-                         `street` varchar(50) NOT NULL,
-                         `state` varchar(20) NOT NULL,
-                         `zipcode` int NOT NULL,
-                         `email_id` varchar(100) NOT NULL,
-                         `contact_no` int NOT NULL,
-                         `salary` decimal(12,2) NOT NULL,
-                         `joining_date` date NOT NULL,
-                         `password` varchar(20) DEFAULT NULL,
-                         PRIMARY KEY (`staff_id`),
-                         UNIQUE KEY `email_id` (`email_id`)
+  `staff_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(60) NOT NULL,
+  `last_name` varchar(60) NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `state` varchar(20) NOT NULL,
+  `zipcode` int NOT NULL,
+  `email_id` varchar(100) NOT NULL,
+  `contact_no` int NOT NULL,
+  `salary` decimal(12,2) NOT NULL,
+  `joining_date` date NOT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`staff_id`),
+  UNIQUE KEY `email_id` (`email_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -424,7 +424,7 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `isReservationPossible`(
 to_date date,
 from_date date,
 num_rooms int,
-room_type varchar(20)) RETURNS int
+p_room_type varchar(20)) RETURNS int
     DETERMINISTIC
 begin
 	declare result boolean;
@@ -432,8 +432,9 @@ begin
 select count(*) into count_rooms from
     (
         select r.*, ra.reservation_number from room r
-                                                   left join reservation_assignment ra
-                                                             on r.room_number = ra.room_number
+	   left join reservation_assignment ra
+	 on r.room_number = ra.room_number
+     where lower(r.room_type) = lower(p_room_type)
     ) as t
         left join reservation res on
             res.reservation_number = t.reservation_number
@@ -446,10 +447,10 @@ where t.room_number not in (
 );
 
 if (num_rooms <= count_rooms) then
-		set result = 1;
+	set result = 1;
 end if;
-	if (num_rooms > count_rooms) then
-		set result = 0;
+if (num_rooms > count_rooms) then
+	set result = 0;
 end if;
 return result;
 end ;;
@@ -876,4 +877,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-20 18:37:08
+-- Dump completed on 2023-04-21 11:56:29

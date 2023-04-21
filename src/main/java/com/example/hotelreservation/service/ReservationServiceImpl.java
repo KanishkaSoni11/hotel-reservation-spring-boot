@@ -3,7 +3,6 @@ package com.example.hotelreservation.service;
 import com.example.hotelreservation.dao.ReservationDao;
 import com.example.hotelreservation.dao.RoomDao;
 import com.example.hotelreservation.dao.StaffRoomDao;
-import com.example.hotelreservation.model.Customer;
 import com.example.hotelreservation.model.Reservation;
 import com.example.hotelreservation.model.ReservationDetails;
 
@@ -40,12 +39,12 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public Reservation makeReservation(ReservationDetails reservationDetails) {
         logger.info("Starting making reservation");
-        Integer isReservationPossible = reservationDao.checkIfReservationIsPossible(
+        boolean isReservationPossible = reservationDao.checkIfReservationIsPossible(
                 reservationDetails.getFromDate(),
                 reservationDetails.getToDate(),
                 reservationDetails.getNumRooms(),
                 reservationDetails.getRoomType());
-        if (isReservationPossible > 0) {
+        if (isReservationPossible) {
             logger.info("Reservation is possible. Procedding with the reservation");
             return reservationDao.createReservation(reservationDetails, reservationDetails.getCurrentCustomer());
         } else {
